@@ -50,5 +50,10 @@ namespace dk.Billekode.Asteroids.HighScores
             }
         }
 
+        public bool GoodEnoughForHighScore(int score)
+        { 
+            return this.highScoreCollection.HighScores.Count < 10 || this.highScoreCollection.HighScores[0].score < score;
+        }
+
 	}
 }

@@ -6,10 +6,26 @@ namespace dk.Billekode.Asteroids.Entities
 {
     public abstract class ARoundMapEntity : MonoBehaviour 
     {
-        public static float xMin = -20f;
-        public static float xMax = 20f;
-        public static float yMin = -20f;
-        public static float yMax = 20f;
+        public static float xMin;
+        public static float xMax;
+        public static float yMin;
+        public static float yMax;
+
+        public static float MapWidth
+        {
+            get
+            {
+                return xMax - xMin;
+            }
+        }
+
+        public static float MapHeight
+        {
+            get
+            {
+                return yMax - xMin;
+            }
+        }
 
         protected void KeepWithinTorus()
         {
@@ -42,8 +58,6 @@ namespace dk.Billekode.Asteroids.Entities
             if(changed)
                 this.transform.position = new Vector2(newX, newY);
         }
-
-
 		
 	}
 }

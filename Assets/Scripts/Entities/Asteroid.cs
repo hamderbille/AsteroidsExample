@@ -9,6 +9,9 @@ namespace dk.Billekode.Asteroids.Entities
         [SerializeField]
         private int scoreValue;
 
+        [SerializeField]
+        private float newSpawnDistanceModifier = 0.05f;
+
         private int size;
         public int Size
         {
@@ -19,11 +22,10 @@ namespace dk.Billekode.Asteroids.Entities
             }
         }
 
-	    void Start () 
+        void Start()
         {
-            //TEST, should be set by gmecontroller
-            //this.Size = 3;
-	    }
+            GameController.Instance.numAsteroidsInGame++;
+        }
 
         void Update()
         {
@@ -34,18 +36,18 @@ namespace dk.Billekode.Asteroids.Entities
         {
             if (collision.gameObject.GetComponent<SpaceShip>() != null)
             {
-                Debug.Log("OUCH");
-                //TODO destroy ship, end game
+                GameController.Instance.SpaceshipDestroyed();
             }
             else if (collision.gameObject.GetComponent<Projectile>() != null)
             {
-                //deploy two new asteroids of smaller size, if not smallest size
+                //deploy two new asteroids of smaller size, if current is not smallest size
                 if (this.size > 1)
                 {
                     this.size--;
 
-                    GameObject instantiatedAsteroid = Instantiate<GameObject>(GameController.Instance.RandomAsteroidPrefab(), this.transform.position, new Quaternion());
-                    instantiatedAsteroid.GetComponent<Asteroid>().Size = this.size;
+                    //spawn asteroids adding and subtracting a bit so they won't be on top of each other.
+                    GameController.Instance.SpawnAsteroid(this.size, this.transform.position + new Vector3(Random.value * MapWidth, Random.value * MapHeight, 0) * this.newSpawnDistanceModifier);
+                    GameController.Instance.SpawnAsteroid(this.size, this.transform.position - new Vector3(Random.value * MapWidth, Random.value * MapHeight, 0) * this.newSpawnDistanceModifier);
                 }
 
                 //add score
@@ -54,6 +56,11 @@ namespace dk.Billekode.Asteroids.Entities
                 Destroy(collision.gameObject);
                 Destroy(this.gameObject);
             }
+        }
+
+        public void OnDestroy()
+        {
+            GameController.Instance.numAsteroidsInGame--;
         }
 	}
 }
