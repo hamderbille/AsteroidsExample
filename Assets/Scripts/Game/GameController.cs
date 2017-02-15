@@ -4,6 +4,7 @@ using UnityEngine;
 using dk.Billekode.Asteroids.Entities;
 using UnityEngine.UI;
 using dk.Billekode.Asteroids.HighScores;
+using dk.Billekode.Asteroids.Flow;
 
 namespace dk.Billekode.Asteroids.Entities
 {
@@ -28,6 +29,12 @@ namespace dk.Billekode.Asteroids.Entities
         [SerializeField]
         private Text waveText;
 
+        [SerializeField]
+        private GameObject GameOverUI;
+
+        [SerializeField]
+        private GameObject GameOverEnterScoreUI;
+
         private SpaceShip spaceShip;
 
         private int wave = 0;
@@ -40,6 +47,9 @@ namespace dk.Billekode.Asteroids.Entities
                 Debug.LogError("[GameController] - instance already set!!");
             else
                 GameController.Instance = this;
+
+            this.GameOverEnterScoreUI.SetActive(false);
+            this.GameOverUI.SetActive(false);
         }
 
         void Start()
@@ -135,12 +145,23 @@ namespace dk.Billekode.Asteroids.Entities
 
             if (HighScoreController.Instance.GoodEnoughForHighScore(this.score))
             {
-                //TODO
+                this.GameOverEnterScoreUI.SetActive(true);
             }
             else
             {
-                //TODO
+                this.GameOverUI.SetActive(true);
             }
+        }
+
+        public void OnBackToMenu()
+        {
+            ApplicationController.Instance.State = EApplicationState.Menu;
+        }
+
+        public void OnSaveScoreBackToMenu()
+        {
+            HighScoreController.Instance.TryAdd(this.GameOverEnterScoreUI.GetComponentInChildren<InputField>().text, score);
+            ApplicationController.Instance.State = EApplicationState.Menu;
         }
 
     }

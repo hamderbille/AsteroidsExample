@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <HighScoreCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <HighScores>
-    <HighScore name="HS 10" score="81" />
-    <HighScore name="HS 3" score="82" />
-    <HighScore name="HS 1" score="84" />
-    <HighScore name="HS 9" score="84" />
-    <HighScore name="HS 4" score="85" />
-    <HighScore name="HS 15" score="85" />
-    <HighScore name="HS 5" score="89" />
     <HighScore name="HS 7" score="94" />
     <HighScore name="HS 8" score="97" />
     <HighScore name="HS 13" score="99" />
+    <HighScore name="abe" score="140" />
+    <HighScore name="AAA" score="160" />
+    <HighScore name="ææv" score="200" />
+    <HighScore name="AAA" score="260" />
+    <HighScore name="nar" score="300" />
+    <HighScore name="AAA" score="360" />
+    <HighScore name="AAA" score="400" />
   </HighScores>
 </HighScoreCollection>
