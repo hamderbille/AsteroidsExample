@@ -17,7 +17,7 @@ public class HighScoreTest : MonoBehaviour {
             highScore.score = Random.Range(0, 100);
             highScore.name = "HS " + i;
             HighScoreController.Instance.TryAdd(highScore );
-            highScore.PrintHighScore();
+            highScore.PrintHighScoreToLog();
         }
         HighScoreController.Instance.PrintHighScoresToLog();
 	}

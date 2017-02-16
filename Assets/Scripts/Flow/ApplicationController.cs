@@ -50,6 +50,9 @@ namespace dk.Billekode.Asteroids.Flow
                 case EApplicationState.Game:
                     SceneManager.LoadScene("Game");
                     break;
+                case EApplicationState.Shutdown:
+                    Application.Quit();
+                    break;
                 default:
                     Debug.LogWarning("[ApplicationController] urecognized state : " + newState);
                     break;

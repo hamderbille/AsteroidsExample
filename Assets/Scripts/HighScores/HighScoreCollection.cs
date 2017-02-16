@@ -14,7 +14,7 @@ namespace dk.Billekode.Asteroids.HighScores
         [XmlArrayItem("HighScore")]
         private List<HighScore> highScores = new List<HighScore>();
         /// <summary>
-        /// return sorted list of high scores
+        /// sorted list of high scores
         /// of max size 10
         /// </summary>
         public List<HighScore> HighScores
@@ -48,7 +48,7 @@ namespace dk.Billekode.Asteroids.HighScores
         public static HighScoreCollection Load(string path)
         {
             if (!File.Exists(path))
-            {
+            {   //if no high score exists yet, create one and save it
                 HighScoreCollection highScoreCollection = new HighScoreCollection();
                 highScoreCollection.Save();
             }
@@ -71,13 +71,13 @@ namespace dk.Billekode.Asteroids.HighScores
             }
         }
 
-        public void PrintHighScores()
+        public void PrintHighScoresToLog()
         {
             this.highScores.Sort();
 
             foreach (HighScore highScore in this.highScores)
             {
-                highScore.PrintHighScore();
+                highScore.PrintHighScoreToLog();
             }
         }
 

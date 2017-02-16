@@ -35,6 +35,12 @@ namespace dk.Billekode.Asteroids.Entities
         [SerializeField]
         private GameObject GameOverEnterScoreUI;
 
+        [SerializeField]
+        private int baseNumberOfAsteroids = 4;
+
+        [SerializeField]
+        private int numExtraAsteroidsPerWave = 2;
+
         private SpaceShip spaceShip;
 
         private int wave = 0;
@@ -99,7 +105,7 @@ namespace dk.Billekode.Asteroids.Entities
 
         private void SpawnAsteroids()
         {
-            int numberToSpawn = 4 + 2 * this.wave;
+            int numberToSpawn = this.baseNumberOfAsteroids + this.numExtraAsteroidsPerWave * this.wave;
             for (int i = 0; i < numberToSpawn; i++)
             {
                 SpawnAsteroid(3, RandomPositionAtDistanceToShip() );
@@ -139,10 +145,6 @@ namespace dk.Billekode.Asteroids.Entities
 
         public void SpaceshipDestroyed()
         { 
-            //TODO check if score is good enough, 
-            //if so, show name input box + button
-            //else just show button
-
             if (HighScoreController.Instance.GoodEnoughForHighScore(this.score))
             {
                 this.GameOverEnterScoreUI.SetActive(true);

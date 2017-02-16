@@ -8,7 +8,24 @@ namespace dk.Billekode.Asteroids.HighScores
     {
         public static HighScoreController Instance;
 
-        public HighScoreCollection highScoreCollection;
+        private HighScoreCollection highScoreCollection;
+
+        /// <summary>
+        /// a clone of the high score list, for display
+        /// purposes only
+        /// </summary>
+        public List<HighScore> HighScoresClone
+        {
+            get
+            {
+                List<HighScore> result = new List<HighScore>(this.highScoreCollection.HighScores.Count);
+                foreach (HighScore highScore in this.highScoreCollection.HighScores)
+                {
+                    result.Add((HighScore)highScore.Clone());
+                }
+                return result;
+            }
+        }
 
         void Awake()
         {
@@ -40,19 +57,19 @@ namespace dk.Billekode.Asteroids.HighScores
             return result;
         }
 
+        public bool GoodEnoughForHighScore(int score)
+        { 
+            return this.highScoreCollection.HighScores.Count < 10 || this.highScoreCollection.HighScores[0].score < score;
+        }
+
         public void PrintHighScoresToLog()
         {
             this.highScoreCollection.HighScores.Sort();
 
             foreach (HighScore highScore in this.highScoreCollection.HighScores)
             {
-                highScore.PrintHighScore();
+                highScore.PrintHighScoreToLog();
             }
-        }
-
-        public bool GoodEnoughForHighScore(int score)
-        { 
-            return this.highScoreCollection.HighScores.Count < 10 || this.highScoreCollection.HighScores[0].score < score;
         }
 
 	}

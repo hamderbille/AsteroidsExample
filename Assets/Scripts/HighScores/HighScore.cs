@@ -6,7 +6,7 @@ using System;
 
 namespace dk.Billekode.Asteroids.HighScores
 {
-    public class HighScore : IComparable<HighScore>
+    public class HighScore : IComparable<HighScore>, ICloneable
     {
         [XmlAttribute("name")]
         public string name;
@@ -14,15 +14,23 @@ namespace dk.Billekode.Asteroids.HighScores
         [XmlAttribute("score")]
         public int score;
 
-
         public int CompareTo(HighScore other)
         {
             return this.score.CompareTo(other.score);
         }
 
-        public void PrintHighScore()
+        public object Clone()
+        {
+            HighScore clone = new HighScore();
+            clone.score = this.score;
+            clone.name = this.name;
+            return clone;
+        }
+
+        public void PrintHighScoreToLog()
         {
             Debug.Log("High Score, name: " + this.name + " score: " + score);
         }
+
     }
 }

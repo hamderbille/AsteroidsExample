@@ -35,7 +35,7 @@ namespace dk.Billekode.Asteroids.HighScores
 
         public void OnQuitButtonClicked()
         {
-            Application.Quit();
+            ApplicationController.Instance.State = EApplicationState.Shutdown;
         }
 
         public void OnHighScoreButtonClicked()
@@ -61,9 +61,10 @@ namespace dk.Billekode.Asteroids.HighScores
 
         private void ShowHighScores()
         {
-            for (int i = HighScoreController.Instance.highScoreCollection.HighScores.Count - 1; i >= 0; i--)
+            List<HighScore> highScores = HighScoreController.Instance.HighScoresClone;
+            for (int i = highScores.Count - 1; i >= 0; i--)
             {
-                HighScore highScore = HighScoreController.Instance.highScoreCollection.HighScores[i];
+                HighScore highScore = highScores[i];
                 GameObject scoreEntry = Instantiate(this.highScoreEntryPrefab, this.highScoreRoot.transform, false);
                 scoreEntry.GetComponent<Text>().text = string.Format("Player: {0} Score: {1}", highScore.name, highScore.score.ToString());
             }
