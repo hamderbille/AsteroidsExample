@@ -23,7 +23,7 @@ namespace dk.Billekode.Asteroids.HighScores
         {
             HighScore clone = new HighScore();
             clone.score = this.score;
-            clone.name = this.name;
+            clone.name = (string)this.name.Clone();
             return clone;
         }
 

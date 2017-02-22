@@ -94,7 +94,7 @@ namespace dk.Billekode.Asteroids.Entities
 
         private GameObject RandomAsteroidPrefab()
         { 
-            return this.asteroidPrefabs[Random.Range(0, this.asteroidPrefabs.Length - 1)];
+            return this.asteroidPrefabs[Random.Range(0, this.asteroidPrefabs.Length)];
         }
 
 
